@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F8F7F4">
+  <meta name="description" content="Chính sách quyền riêng tư của Làm Chủ Thời Gian: Cozy Timer">
+  <title>Làm Chủ Thời Gian: Cozy Timer — Chính sách quyền riêng tư</title>
+
+  <link rel="icon" type="image/png" href="./cozy-timer-icon.png">
+  <link rel="apple-touch-icon" href="./cozy-timer-icon.png">
+
+  <style>
+    :root {
+      --bg: #f8f7f4;
+      --surface: #ffffff;
+      --surface-soft: #f3f1ec;
+      --text: #171a20;
+      --muted: #707682;
+      --line: #e7e4de;
+      --brand: #5c43d6;
+      --brand-soft: #f0ecff;
+      --success: #16a46f;
+      --shadow: 0 20px 60px rgba(60, 82, 123, 0.07);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --content: 920px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(92, 67, 214, .07), transparent 34rem),
+        radial-gradient(circle at 90% 10%, rgba(22, 164, 111, .06), transparent 28rem),
+        var(--bg);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.72;
+    }
+
+    a {
+      color: var(--brand);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    .page {
+      width: min(var(--content), calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 72px;
+    }
+
+    .hero {
+      padding: 34px 36px 40px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: rgba(255, 255, 255, .9);
+      backdrop-filter: blur(16px);
+      box-shadow: var(--shadow);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 44px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 0;
+    }
+
+    .brand img {
+      width: 54px;
+      height: 54px;
+      flex: 0 0 54px;
+      object-fit: cover;
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(21, 26, 36, .09);
+    }
+
+    .brand-name {
+      min-width: 0;
+    }
+
+    .brand-name strong {
+      display: block;
+      font-size: 16px;
+      line-height: 1.25;
+      letter-spacing: -.02em;
+    }
+
+    .brand-name span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .lang {
+      display: inline-flex;
+      flex: 0 0 auto;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface-soft);
+    }
+
+    .lang button {
+      min-height: 38px;
+      border: 0;
+      border-radius: 999px;
+      padding: 8px 13px;
+      color: var(--muted);
+      background: transparent;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .lang button.active {
+      color: #fff;
+      background: var(--text);
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      color: var(--brand);
+      background: var(--brand-soft);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(38px, 7vw, 62px);
+      line-height: 1.04;
+      letter-spacing: -.05em;
+    }
+
+    .lead {
+      max-width: 760px;
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin-top: 26px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .card {
+      margin-top: 18px;
+      padding: 44px 46px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      box-shadow: 0 12px 36px rgba(19, 24, 33, .04);
+    }
+
+    article[data-lang] {
+      display: none;
+    }
+
+    article[data-lang].active {
+      display: block;
+    }
+
+    .summary {
+      padding: 24px 26px;
+      border: 1px solid #e3dffc;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, #f8f6ff 0%, #f3fbf7 100%);
+    }
+
+    .summary p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .summary p+p {
+      margin-top: 12px;
+      color: var(--muted);
+    }
+
+    .section {
+      padding: 38px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section:last-of-type {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .section-number {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--brand);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 25px;
+      line-height: 1.3;
+      letter-spacing: -.025em;
+    }
+
+    p {
+      margin: 0 0 15px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .item {
+      min-width: 0;
+      padding: 18px 19px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: #fcfbf9;
+    }
+
+    .item strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .item span {
+      display: block;
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    ul {
+      margin: 14px 0 0;
+      padding-left: 21px;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    .note {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-left: 4px solid var(--success);
+      border-radius: 12px;
+      background: #f2fbf7;
+      color: #274638;
+    }
+
+    .providers {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .provider {
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: #fcfbf9;
+    }
+
+    .provider strong {
+      margin-right: 5px;
+    }
+
+    .contact {
+      margin-top: 38px;
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      color: #fff;
+      background: linear-gradient(135deg, #171a20, #242936);
+    }
+
+    .contact h2 {
+      margin-top: 0;
+      color: #fff;
+    }
+
+    .contact p {
+      color: #d8dde8;
+    }
+
+    .contact a {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 10px 13px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .11);
+      color: #fff;
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      padding: 24px 8px 0;
+      color: var(--muted);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    p,
+    li,
+    a,
+    strong,
+    span {
+      overflow-wrap: anywhere;
+    }
+
+    @supports (padding: max(0px)) {
+      .page {
+        padding-left: max(0px, env(safe-area-inset-left));
+        padding-right: max(0px, env(safe-area-inset-right));
+        padding-bottom: max(72px, env(safe-area-inset-bottom));
+      }
+    }
+
+    @media (max-width: 700px) {
+      .page {
+        width: min(100% - 20px, var(--content));
+        padding-top: 10px;
+      }
+
+      .hero {
+        padding: 22px 20px 28px;
+        border-radius: 22px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 34px;
+      }
+
+      .brand img {
+        width: 50px;
+        height: 50px;
+        flex-basis: 50px;
+        border-radius: 14px;
+      }
+
+      .lang {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .lang button {
+        width: 100%;
+        min-height: 44px;
+      }
+
+      h1 {
+        font-size: clamp(36px, 11vw, 48px);
+      }
+
+      .lead {
+        font-size: 16px;
+      }
+
+      .meta {
+        display: block;
+      }
+
+      .meta span {
+        display: block;
+        margin-top: 5px;
+      }
+
+      .card {
+        padding: 26px 20px;
+        border-radius: 22px;
+      }
+
+      .summary {
+        padding: 20px;
+      }
+
+      .section {
+        padding: 32px 0;
+      }
+
+      h2 {
+        font-size: 21px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact {
+        padding: 22px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="topbar">
+        <div class="brand">
+          <img src="./cozy-timer-icon.png" alt="Cozy Timer">
+          <div class="brand-name">
+            <strong id="app-name">Làm Chủ Thời Gian: Cozy Timer</strong>
+            <span>Đồng bộ thời gian giữa các thiết bị</span>
+          </div>
+        </div>
+
+        <div class="lang" role="group" aria-label="Language">
+          <button id="btn-vi" class="active" type="button" onclick="setLanguage('vi')">Tiếng Việt</button>
+          <button id="btn-en" type="button" onclick="setLanguage('en')">English</button>
+        </div>
+      </div>
+
+      <div class="kicker">PRIVACY POLICY</div>
+      <h1>Đơn giản với thời gian.<br>Minh bạch với dữ liệu.</h1>
+
+      <p class="lead">
+        Cozy Timer giúp bạn theo dõi thời gian theo cách linh hoạt hơn — dùng riêng cho bản thân,
+        chia sẻ cùng nhóm làm việc, hoặc đồng bộ nhiều bộ đếm giữa các thiết bị trong quán café,
+        box, phòng hay những không gian cần nhiều người cùng theo dõi.
+      </p>
+
+      <div class="meta">
+        <span>Cập nhật lần cuối: <strong>29 tháng 10, 2026</strong></span>
+        <span>Áp dụng cho Cozy Timer trên iOS và Android</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <article data-lang="vi" class="active">
+        <div class="summary">
+          <p><strong>Quyền riêng tư không phải là một phần phụ của Cozy Timer.</strong></p>
+          <p>
+            Chúng tôi chỉ xử lý những thông tin cần thiết để bạn đăng nhập, tạo và đồng bộ timer,
+            chia sẻ nhóm, nhận thông báo và sử dụng ứng dụng ổn định trên nhiều thiết bị.
+            Chính sách này mô tả rõ dữ liệu nào được sử dụng, vì sao cần dữ liệu đó và bạn có thể làm gì với dữ liệu của
+            mình.
+          </p>
+        </div>
+
+        <section class="section">
+          <span class="section-number">01</span>
+          <h2>Cozy Timer được dùng như thế nào?</h2>
+          <p>
+            Cozy Timer là ứng dụng bộ đếm thời gian dành cho cả nhu cầu cá nhân và sử dụng chung.
+            Bạn có thể tạo timer cho công việc, học tập, nghỉ ngơi hoặc những hoạt động hằng ngày.
+          </p>
+          <p>
+            Với nhóm làm việc, timer có thể được chia sẻ để nhiều người cùng nhìn thấy một trạng thái thời gian.
+            Với quán café hoặc mô hình có nhiều box/phòng, mỗi khu vực có thể có timer riêng và được theo dõi
+            từ nhiều thiết bị đã được cấp quyền.
+          </p>
+          <p>
+            Khi một timer được bắt đầu, tạm dừng, đặt lại hoặc thay đổi trên một thiết bị,
+            các thiết bị khác trong cùng nhóm có thể nhận trạng thái cập nhật để mọi người cùng nhìn thấy cùng một mốc
+            thời gian.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">02</span>
+          <h2>Thông tin chúng tôi xử lý</h2>
+          <p class="muted">
+            Cozy Timer không cần mọi thông tin về bạn. Ứng dụng chỉ xử lý những dữ liệu cần thiết cho chức năng bạn đang
+            sử dụng.
+          </p>
+
+          <div class="grid">
+            <div class="item">
+              <strong>Tài khoản và đăng nhập</strong>
+              <span>Email, tên hiển thị, ảnh đại diện, ID từ Google hoặc Apple và thông tin cần thiết để xác thực tài
+                khoản.</span>
+            </div>
+            <div class="item">
+              <strong>Timer và lịch sử</strong>
+              <span>Tên timer, thời lượng, thời điểm bắt đầu/kết thúc và lịch sử gần đây để vận hành và đồng bộ bộ
+                đếm.</span>
+            </div>
+            <div class="item">
+              <strong>Nhóm và quyền truy cập</strong>
+              <span>Thành viên, vai trò, mã mời, QR invitation và yêu cầu tham gia để hỗ trợ chia sẻ giữa nhiều
+                người.</span>
+            </div>
+            <div class="item">
+              <strong>Thông báo thiết bị</strong>
+              <span>FCM token và thông tin cần thiết để gửi thông báo liên quan đến timer hoặc yêu cầu tham gia
+                nhóm.</span>
+            </div>
+            <div class="item">
+              <strong>Tùy chọn trên thiết bị</strong>
+              <span>Ngôn ngữ, giao diện, tùy chọn thông báo và một số trạng thái UI được lưu cục bộ.</span>
+            </div>
+            <div class="item">
+              <strong>Thông tin kỹ thuật</strong>
+              <span>Metadata mạng tiêu chuẩn có thể được xử lý bởi Supabase, Firebase và hạ tầng cần thiết để vận hành
+                và bảo mật dịch vụ.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <span class="section-number">03</span>
+          <h2>Đăng nhập bằng Google và Apple</h2>
+          <p>
+            Cozy Timer hỗ trợ Google Sign-In trên Android và iOS, đồng thời hỗ trợ Sign in with Apple trên iOS.
+            Việc xác thực được thực hiện thông qua Supabase Auth và nhà cung cấp đăng nhập tương ứng.
+          </p>
+          <p>
+            Khi phù hợp và an toàn, các danh tính trả về cùng một email đã xác minh có thể được liên kết với cùng một
+            tài khoản Cozy Timer.
+            Phiên đăng nhập được lưu bằng vùng lưu trữ bảo mật của hệ điều hành thay vì được lưu như một tùy chọn thông
+            thường.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">04</span>
+          <h2>Timer dùng chung và dữ liệu nhóm</h2>
+          <p>
+            Khi bạn tham gia một nhóm, các thành viên có quyền phù hợp có thể cùng xem hoặc điều khiển timer trong nhóm
+            đó.
+            Chủ nhóm có thể xem yêu cầu tham gia, phê duyệt thành viên và lựa chọn mức quyền như chỉ xem hoặc toàn quyền
+            điều khiển timer.
+          </p>
+          <p>
+            Cozy Timer sử dụng cơ chế phân quyền phía máy chủ để bảo vệ dữ liệu nhóm.
+            Giao diện trên ứng dụng không được xem là ranh giới bảo mật duy nhất.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">05</span>
+          <h2>Camera và mã QR</h2>
+          <p>
+            Camera chỉ được yêu cầu khi bạn chủ động chọn quét mã QR để tham gia một nhóm.
+            Khung hình camera được sử dụng để nhận diện nội dung QR và Cozy Timer không chủ ý tải lên hoặc lưu trữ những
+            khung hình đó.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">06</span>
+          <h2>Thông báo</h2>
+          <p>
+            Cozy Timer sử dụng Firebase Cloud Messaging để hỗ trợ thông báo liên quan đến timer và yêu cầu tham gia
+            nhóm.
+            Token thông báo được tạo riêng cho từng thiết bị hoặc lần cài đặt.
+          </p>
+          <p>
+            Bạn có thể từ chối hoặc tắt quyền thông báo bất kỳ lúc nào trong cài đặt của iOS hoặc Android.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">07</span>
+          <h2>Các dịch vụ được sử dụng</h2>
+          <p>
+            Cozy Timer sử dụng một số dịch vụ bên thứ ba để đăng nhập, đồng bộ và gửi thông báo một cách ổn định.
+          </p>
+
+          <div class="providers">
+            <div class="provider"><strong>Supabase</strong> — xác thực, cơ sở dữ liệu, Realtime, phân quyền phía máy chủ
+              và các chức năng backend.</div>
+            <div class="provider"><strong>Firebase Cloud Messaging</strong> — đăng ký thiết bị và gửi push notification.
+            </div>
+            <div class="provider"><strong>Google AdMob / Google Mobile Ads SDK</strong> — hiển thị banner quảng cáo.
+              SDK có thể xử lý địa chỉ IP, thông tin thiết bị, định danh quảng cáo và tương tác quảng cáo theo cấu hình
+              và lựa chọn quyền riêng tư của bạn. Ứng dụng sử dụng Google UMP để hỏi lựa chọn khi cần và cung cấp mục
+              “Quyền riêng tư quảng cáo” trong Cài đặt. Xem <a href="https://policies.google.com/technologies/ads">cách Google sử dụng thông tin quảng cáo</a>.</div>
+            <div class="provider"><strong>Google Sign-In</strong> — đăng nhập bằng tài khoản Google.</div>
+            <div class="provider"><strong>Sign in with Apple</strong> — đăng nhập bằng Apple ID trên iOS.</div>
+            <div class="provider"><strong>GitHub Pages</strong> — lưu trữ trang Chính sách quyền riêng tư này.</div>
+          </div>
+        </section>
+
+        <section class="section">
+          <span class="section-number">08</span>
+          <h2>Thời gian lưu giữ dữ liệu</h2>
+          <p>
+            Chúng tôi cố gắng không lưu dữ liệu lâu hơn mức cần thiết cho chức năng mà dữ liệu phục vụ.
+            Theo hành vi hiện tại của hệ thống:
+          </p>
+          <ul>
+            <li>Lịch sử phiên timer được tự động xóa sau <strong>4 ngày</strong>.</li>
+            <li>Đăng ký push của thiết bị không hoạt động được tự động xóa sau <strong>45 ngày</strong>.</li>
+            <li>Khi đăng xuất, Cozy Timer xóa đăng ký push của thiết bị hiện tại và thu hồi phiên đăng nhập tương ứng.
+            </li>
+            <li>Dữ liệu tài khoản, hồ sơ, timer và nhóm có thể được giữ cho đến khi bị xóa theo quy trình xóa tài khoản
+              hoặc dữ liệu.</li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <span class="section-number">09</span>
+          <h2>Xóa tài khoản và dữ liệu</h2>
+          <p>
+            Bạn có thể yêu cầu xóa tài khoản và dữ liệu liên quan bằng cách liên hệ với Cozy Timer.
+            Để tránh xử lý nhầm tài khoản, chúng tôi có thể yêu cầu xác minh email hoặc thông tin nhận dạng tài khoản
+            bạn đã dùng để đăng nhập.
+          </p>
+          <div class="note">
+            Phiên bản Cozy Timer hiện tại chưa cung cấp nút tự phục vụ để xóa toàn bộ tài khoản trực tiếp trong ứng
+            dụng.
+          </div>
+        </section>
+
+        <section class="section">
+          <span class="section-number">10</span>
+          <h2>Bảo mật</h2>
+          <p>
+            Cozy Timer sử dụng secure storage cho phiên đăng nhập, Row Level Security,
+            cơ chế phân quyền phía máy chủ và những biện pháp bảo vệ được cung cấp bởi các dịch vụ hạ tầng đang sử dụng.
+          </p>
+          <p>
+            Dù chúng tôi cố gắng sử dụng những biện pháp phù hợp để bảo vệ thông tin,
+            không phương thức truyền hoặc lưu trữ điện tử nào có thể đảm bảo an toàn tuyệt đối.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">11</span>
+          <h2>Quyền và lựa chọn của bạn</h2>
+          <p>
+            Tùy theo nơi bạn sinh sống, bạn có thể có quyền yêu cầu truy cập, chỉnh sửa,
+            xóa hoặc hạn chế một số hoạt động xử lý dữ liệu cá nhân.
+          </p>
+          <p>
+            Bạn cũng có thể thu hồi quyền camera và thông báo trực tiếp trong cài đặt thiết bị bất kỳ lúc nào.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">12</span>
+          <h2>Quyền riêng tư của trẻ em</h2>
+          <p>
+            Cozy Timer không được thiết kế nhằm chủ động thu thập thông tin cá nhân của trẻ em
+            chưa đủ tuổi tự mình đồng ý theo luật áp dụng.
+            Nếu chúng tôi biết dữ liệu của trẻ em đã được thu thập không phù hợp với yêu cầu pháp luật,
+            chúng tôi sẽ thực hiện các bước thích hợp để xóa dữ liệu đó.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">13</span>
+          <h2>Thay đổi Chính sách quyền riêng tư</h2>
+          <p>
+            Chính sách này có thể được cập nhật khi Cozy Timer thay đổi tính năng,
+            nhà cung cấp dịch vụ hoặc khi có yêu cầu pháp lý mới.
+            Phiên bản mới sẽ được đăng tại chính URL này và ngày cập nhật ở đầu trang sẽ được thay đổi tương ứng.
+          </p>
+        </section>
+
+        <div class="contact">
+          <h2>Liên hệ với Cozy Timer</h2>
+          <p>
+            Nếu bạn có câu hỏi về quyền riêng tư, muốn thực hiện quyền đối với dữ liệu
+            hoặc muốn yêu cầu xóa tài khoản và dữ liệu, hãy liên hệ với chúng tôi.
+          </p>
+          <a href="mailto:vuongdev1403@gmail.com">vuongdev1403@gmail.com</a>
+        </div>
+      </article>
+
+      <article data-lang="en">
+        <div class="summary">
+          <p><strong>Privacy is not an afterthought in Cozy Timer.</strong></p>
+          <p>
+            We process only the information needed to sign you in, run and synchronize timers,
+            share groups, deliver permitted notifications, and keep the app working reliably across devices.
+          </p>
+        </div>
+
+        <section class="section">
+          <span class="section-number">01</span>
+          <h2>What Cozy Timer is for</h2>
+          <p>
+            Cozy Timer is a timer app for both personal and shared use.
+            You can create timers for work, study, breaks, exercise, or everyday routines.
+          </p>
+          <p>
+            Teams can share timers so multiple people see the same timing state.
+            Cafés and businesses with several boxes or rooms can keep separate timers for different areas
+            while authorized devices stay synchronized.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">02</span>
+          <h2>Information we process</h2>
+
+          <div class="grid">
+            <div class="item">
+              <strong>Account and sign-in</strong>
+              <span>Email, display name, avatar, Google or Apple identity ID, and information needed to authenticate
+                your account.</span>
+            </div>
+            <div class="item">
+              <strong>Timers and history</strong>
+              <span>Timer name, duration, start/end timestamps, and recent history required to run and synchronize
+                timers.</span>
+            </div>
+            <div class="item">
+              <strong>Groups and permissions</strong>
+              <span>Membership, roles, invitation codes, QR invitations, and join requests used for shared
+                access.</span>
+            </div>
+            <div class="item">
+              <strong>Device notifications</strong>
+              <span>FCM token and related information needed to deliver timer and group-request notifications.</span>
+            </div>
+            <div class="item">
+              <strong>On-device preferences</strong>
+              <span>Language, theme, notification preference, and limited UI state stored locally.</span>
+            </div>
+            <div class="item">
+              <strong>Technical information</strong>
+              <span>Standard network metadata that may be processed by Supabase, Firebase, and infrastructure
+                providers.</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="section">
+          <span class="section-number">03</span>
+          <h2>Google and Apple sign-in</h2>
+          <p>
+            Cozy Timer supports Google Sign-In on Android and iOS and Sign in with Apple on iOS.
+            Authentication is handled through Supabase Auth and the relevant identity provider.
+          </p>
+          <p>
+            Where appropriate and safe, identities returning the same verified email may be linked to the same Cozy
+            Timer account.
+            Authentication sessions are stored using secure operating-system storage.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">04</span>
+          <h2>Shared timers and group data</h2>
+          <p>
+            When you join a group, members with the appropriate permissions may view or control timers in that group.
+            Group owners manage join approvals and access levels.
+          </p>
+          <p>
+            Cozy Timer uses server-side authorization to protect shared data.
+            The Flutter interface is not treated as the sole security boundary.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">05</span>
+          <h2>Camera and QR codes</h2>
+          <p>
+            Camera access is requested only when you choose to scan a QR invitation.
+            Frames are used to decode the QR code, and Cozy Timer does not intentionally upload or store those scanning
+            frames.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">06</span>
+          <h2>Notifications</h2>
+          <p>
+            Cozy Timer uses Firebase Cloud Messaging for timer and group join-request notifications.
+            Notification tokens are specific to a device or installation.
+            You may disable notifications at any time in iOS or Android settings.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">07</span>
+          <h2>Service providers</h2>
+          <div class="providers">
+            <div class="provider"><strong>Supabase</strong> — authentication, database, Realtime, server-side
+              authorization, and backend functions.</div>
+            <div class="provider"><strong>Firebase Cloud Messaging</strong> — device registration and push notification
+              delivery.</div>
+            <div class="provider"><strong>Google AdMob / Google Mobile Ads SDK</strong> — displays banner ads.
+              The SDK may process IP addresses, device information, advertising identifiers, and ad interactions according
+              to its configuration and your privacy choices. The app uses Google UMP where required and provides
+              “Ad privacy choices” in Settings. See <a href="https://policies.google.com/technologies/ads">Google's advertising information</a>.</div>
+            <div class="provider"><strong>Google Sign-In</strong> — Google account authentication.</div>
+            <div class="provider"><strong>Sign in with Apple</strong> — Apple ID authentication on iOS.</div>
+            <div class="provider"><strong>GitHub Pages</strong> — hosting this Privacy Policy page.</div>
+          </div>
+        </section>
+
+        <section class="section">
+          <span class="section-number">08</span>
+          <h2>Data retention</h2>
+          <ul>
+            <li>Timer-session history is automatically deleted after <strong>4 days</strong>.</li>
+            <li>Inactive push-device registrations are automatically deleted after <strong>45 days</strong>.</li>
+            <li>Signing out removes the current device's push registration and revokes the relevant session.</li>
+            <li>Account, profile, timer, and group data may remain until deleted through the account/data-deletion
+              process.</li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <span class="section-number">09</span>
+          <h2>Account and data deletion</h2>
+          <p>
+            You may request deletion of your account and associated data by contacting Cozy Timer.
+            We may need to verify the email address or other account information you used to sign in.
+          </p>
+          <div class="note">
+            The current Cozy Timer app does not yet provide a self-service control for deleting the entire account
+            inside the app.
+          </div>
+        </section>
+
+        <section class="section">
+          <span class="section-number">10</span>
+          <h2>Security</h2>
+          <p>
+            Cozy Timer uses secure session storage, Row Level Security, server-side authorization,
+            and security measures provided by its infrastructure services.
+            No electronic transmission or storage method can be guaranteed to be completely secure.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">11</span>
+          <h2>Your rights and choices</h2>
+          <p>
+            Depending on where you live, you may have rights to request access to, correction of,
+            deletion of, or restriction of certain processing of your personal information.
+            You can also revoke camera and notification permissions directly in your device settings.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">12</span>
+          <h2>Children's privacy</h2>
+          <p>
+            Cozy Timer is not designed to knowingly collect personal information from children
+            who are below the age at which they may lawfully consent under applicable law.
+          </p>
+        </section>
+
+        <section class="section">
+          <span class="section-number">13</span>
+          <h2>Changes to this Privacy Policy</h2>
+          <p>
+            This policy may be updated when Cozy Timer changes features, service providers, or legal requirements.
+            The updated version will be published at this same URL and the date at the top of the page will be revised.
+          </p>
+        </section>
+
+        <div class="contact">
+          <h2>Contact Cozy Timer</h2>
+          <p>
+            If you have privacy questions, want to exercise a data right,
+            or want to request account and data deletion, please contact us.
+          </p>
+          <a href="mailto:vuongdev1403@gmail.com">vuongdev1403@gmail.com</a>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      © 2026 <span id="footer-app-name">Làm Chủ Thời Gian: Cozy Timer</span>
+    </footer>
+  </main>
+
+  <script>
+    function setLanguage(lang) {
+      document.documentElement.lang = lang;
+
+      document.querySelectorAll('article[data-lang]').forEach(function (article) {
+        article.classList.toggle('active', article.dataset.lang === lang);
+      });
+
+      document.getElementById('btn-vi').classList.toggle('active', lang === 'vi');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+      const appName = lang === 'vi'
+        ? 'Làm Chủ Thời Gian: Cozy Timer'
+        : 'Own Your Time: Cozy Timer';
+
+      document.getElementById('app-name').textContent = appName;
+      document.getElementById('footer-app-name').textContent = appName;
+
+      document.title = lang === 'vi'
+        ? 'Làm Chủ Thời Gian: Cozy Timer — Chính sách quyền riêng tư'
+        : 'Own Your Time: Cozy Timer — Privacy Policy';
+
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute(
+          'content',
+          lang === 'vi'
+            ? 'Chính sách quyền riêng tư của Làm Chủ Thời Gian: Cozy Timer'
+            : 'Privacy Policy for Own Your Time: Cozy Timer'
+        );
+      }
+
+      try {
+        localStorage.setItem('cozyTimerPrivacyLanguage', lang);
+      } catch (_) { }
+    }
+
+    let initial = 'vi';
+
+    try {
+      const saved = localStorage.getItem('cozyTimerPrivacyLanguage');
+      if (saved === 'vi' || saved === 'en') initial = saved;
+    } catch (_) { }
+
+    setLanguage(initial);
+  </script>
+</body>
+
+</html>
